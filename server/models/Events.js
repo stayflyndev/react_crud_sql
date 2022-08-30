@@ -1,21 +1,17 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const hotelSchema = new Schema({
-    title:
-    {
-        String,
-        required: true
-    },
+const eventSchema = new Schema({
+    title: String,
     author: String,
-    desc: {String, required: true},
+    desc: {String},
     distance: String, // String is shorthand for {type: String}
     comments: [{ body: String, date: Date }],
-    photos: [{
+    photos: [
         String
-    }],
-    tickets:[{String}],
-    price:{Number, required:true},
+    ],
+    tickets:[String],
+    price:{Number},
     featured:{Boolean, default: false},
     date: { type: Date, default: Date.now },
     hidden: Boolean,
@@ -24,3 +20,5 @@ const hotelSchema = new Schema({
         favs: Number
     }
 });
+
+module.exports = mongoose.model('Event', eventSchema)
