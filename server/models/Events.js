@@ -4,14 +4,12 @@ const { Schema } = mongoose;
 const eventSchema = new Schema({
     title: String,
     author: String,
-    desc: {String},
+    desc: String,
     distance: String, // String is shorthand for {type: String}
     comments: [{ body: String, date: Date }],
-    photos: [
-        String
-    ],
+    photos: [String],
     tickets:[String],
-    price:{Number},
+    price:Number,
     featured:{Boolean, default: false},
     date: { type: Date, default: Date.now },
     hidden: Boolean,

@@ -12,7 +12,7 @@ dotenv.config()
 const port = 5000
 
 //db connection 
-const connect = async () => {
+const dbconnect = async () => {
   try {
     await mongoose.connect(process.env.MONGODB);
     console.log("db connected")
@@ -28,6 +28,9 @@ mongoose.connection.on('disconnected', () => {
 })
 
 //middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/auth", authRoute)
 app.use("/users", usersRoute)
 app.use("/events", eventsRoute)
@@ -39,6 +42,6 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  connect()
+  dbconnect()
   console.log(`Example app listening on port ${port}`)
 })
