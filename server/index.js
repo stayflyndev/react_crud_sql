@@ -6,13 +6,14 @@ const eventsRoute = require('./routes/events')
 const ticketsRoute = require('./routes/tickets')
 
 const mongoose = require('mongoose')
-
 const app = express()
-dotenv.config()
 const port = 5000
 
+dotenv.config()
+
+
 //db connection 
-const dbconnect = async () => {
+const dbconnected = async () => {
   try {
     await mongoose.connect(process.env.MONGODB);
     console.log("db connected")
@@ -42,6 +43,6 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  dbconnect()
+  dbconnected()
   console.log(`Example app listening on port ${port}`)
 })

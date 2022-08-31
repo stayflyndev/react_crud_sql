@@ -9,7 +9,7 @@ const eventSchema = new Schema({
     comments: [{ body: String, date: Date }],
     photos: [String],
     tickets:[String],
-    price:Number,
+    cost: Number,
     featured:{Boolean, default: false},
     date: { type: Date, default: Date.now },
     hidden: Boolean,
@@ -19,4 +19,5 @@ const eventSchema = new Schema({
     }
 });
 
+//document
 module.exports = mongoose.model('Event', eventSchema)
