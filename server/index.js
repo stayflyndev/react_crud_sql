@@ -29,6 +29,7 @@ mongoose.connection.on('disconnected', () => {
 })
 
 //middleware
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -37,9 +38,16 @@ app.use("/users", usersRoute)
 app.use("/events", eventsRoute)
 app.use("/tickets", ticketsRoute)
 
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+//ERR HANDLING FROM THE ROUTES
+app.use((error, req, res, next) => {
+  const errorStatus = error.status || 500
+  const errorMessage = error.message || "Ooops! There was an error."
+  console.log("Interrupted with error: " + errorMessage)
+  return res.status(errorStatus).json({
+    message: errorMessage
+    
+  })
+  
 })
 
 app.listen(port, () => {

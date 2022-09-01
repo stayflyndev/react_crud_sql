@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const Event = require("../models/Events")
+const Event = require("../models/Events");
+const { createError } = require('../utils/error');
 
 //CREATE NEW EVENT
 router.post('/', async (req, res) => {
@@ -64,15 +65,14 @@ router.get('/:id', async (req, res) => {
 })
 
 //GET ALL EVENTS
-router.get('/', async (req, res) => {
-
-    try {
-        const allEvent = await Event.find({})
+router.get('/', async (req, res, next) => {
+      try {
+        const allEvent = await Event.find({gggg})
         res.status(200).send(allEvent)
         // console.log(allEvent)
 
     } catch (err) {
-        res.status(500).json(err)
+       next(err)
     }
 })
 
