@@ -1,12 +1,10 @@
 const express = require('express')
 const router = express.Router();
+const registerUser = require('../controllers/auth.controller')
 
-router.get('/', (req, res) => {
-    res.send("this is a index")
-})
-router.get('/register', (req, res) => {
-    res.send("this is a index")
-})
+//CREATE NEW USER
+//POST
+router.post('/register', registerUser)
 
 
 module.exports = router;

@@ -17,6 +17,7 @@ const dbconnected = async () => {
   try {
     await mongoose.connect(process.env.MONGODB);
     console.log("db connected")
+    
   } catch (error) {
     //initial connection
     throw error;
@@ -40,7 +41,7 @@ app.use("/tickets", ticketsRoute)
 
 //ERR HANDLING FROM THE ROUTES
 app.use((error, req, res, next) => {
-  const errorStatus = error.status || 500
+  const errorStatus = error.status || 502
   const errorMessage = error.message || "Ooops! There was an error."
   console.log("Interrupted with error: " + errorMessage)
   return res.status(errorStatus).json({
