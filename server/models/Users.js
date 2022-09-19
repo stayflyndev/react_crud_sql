@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose  from 'mongoose';
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -26,4 +26,4 @@ const userSchema = new Schema({
 const test = mongoose.model('User', userSchema)
 test.createIndexes()
 
-module.exports = test
+export default  test

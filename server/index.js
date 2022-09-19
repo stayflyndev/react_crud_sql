@@ -1,11 +1,11 @@
-const express = require('express')
-const dotenv = require('dotenv')
-const authRoute = require('./routes/auth')
-const usersRoute = require('./routes/users')
-const eventsRoute = require('./routes/events')
-const ticketsRoute = require('./routes/tickets')
+import express from 'express'
+import dotenv from 'dotenv'
+import authRoute from './routes/auth.js'
+import usersRoute from './routes/users.js'
+import eventsRoute from './routes/events.js'
+import ticketsRoute from './routes/tickets.js'
 
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 const app = express()
 const port = 5000
 
@@ -43,10 +43,12 @@ app.use("/tickets", ticketsRoute)
 app.use((error, req, res, next) => {
   const errorStatus = error.status || 502
   const errorMessage = error.message || "Ooops! There was an error."
-  console.log("Interrupted with error: " + errorMessage)
+  console.log("Interrupted with error: " + errorMessage);
   return res.status(errorStatus).json({
-    message: errorMessage
-    
+    success:false, 
+    errorStatus: errorStatus,
+    message: errorMessage,
+
   })
   
 })
