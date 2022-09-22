@@ -17,13 +17,13 @@ const userSchema = new Schema({
         required: true,
     },
     isAdmin: {
-        Boolean,
+        type: Boolean,
         default: false
     }
 },
     { timestamps: true });
 
-const test = mongoose.model('User', userSchema)
-test.createIndexes()
+const users = mongoose.model('User', userSchema)
+users.createIndexes()
 
-export default  test
+export default  users

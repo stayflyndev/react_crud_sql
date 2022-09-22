@@ -1,23 +1,23 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const hotelSchema = new Schema({
+const ticketSchema = new Schema({
     title:
     {
         String,
         required: true
     },
+    price: {
+        type: Number,
+        required: true
+    },
     author: String,
-    desc: String,
     distance: String, // String is shorthand for {type: String}
-    comments: [{ body: String, date: Date }],
-    photos: [{
-        String
-    }],
     date: { type: Date, default: Date.now },
-    hidden: Boolean,
-    meta: {
-        votes: Number,
-        favs: Number
-    }
+    ticketHolders: [{number: Number, unavailableTicket: {type: [Date]}}]
 });
+
+const ticket = mongoose.model('User', userSchema)
+ticket.createIndexes()
+
+export default ticket

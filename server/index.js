@@ -4,8 +4,10 @@ import authRoute from './routes/auth.js'
 import usersRoute from './routes/users.js'
 import eventsRoute from './routes/events.js'
 import ticketsRoute from './routes/tickets.js'
-
+import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
+
+
 const app = express()
 const port = 5000
 
@@ -30,7 +32,7 @@ mongoose.connection.on('disconnected', () => {
 })
 
 //middleware
-
+app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,6 +1,9 @@
 import User from '../models/Users.js'
 import bcrypt from 'bcrypt';
 import { createError } from '../utils/error.js';
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+
 
 //CREATE NEW USER
 //POST
@@ -43,7 +46,12 @@ export const loginUser = async (req, res, next) => {
         const passwordIsCorrect = await bcrypt.compare(userpw, hashpw)
         if (!passwordIsCorrect) return next(createError(500, "Incorrect Username or Password"))
 
-        res.status(200).json(user)
+        //dont send password / admin
+        const {password, isAdmin, ...otherDetails} = user._doc
+
+        const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, process.env.JWT)
+        res.cookie("access_token", token, {httpOnly:true}).status(200).json({...otherDetails})
+        
     } catch (err) {
 
         next(err)
