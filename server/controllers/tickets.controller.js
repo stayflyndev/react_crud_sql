@@ -26,7 +26,7 @@ try {
 }
 
 
-//UPDATE REGISTRATION
+//UPDATE TICKET  REGISTRATION
 //PUT
 export const updateTicket = async (req, res, next) => {
     try {
@@ -44,7 +44,7 @@ export const updateTicket = async (req, res, next) => {
 //DELETE
 export const deleteTicket = async (req, res, next) => {
     const eventId = req.params.eventid
-
+ console.log(eventId)
     try {
         const ticket  = await Ticket.findByIdAndDelete(req.params.id)
         try{
@@ -56,7 +56,6 @@ export const deleteTicket = async (req, res, next) => {
         }
         res.status(200).json(ticket)
         console.log("Registration deleted!")
-        res.send("regitration deleted")
     } catch (err) {
         next(err)
     }
@@ -76,7 +75,7 @@ export const getOneTicket = async (req, res, next) => {
     }
 }
 
-//GET ALL EVENTS
+//GET ALL EVENT TICKETS
 //GET
 export const getAllTickets = async (req, res, next) => {
     try {

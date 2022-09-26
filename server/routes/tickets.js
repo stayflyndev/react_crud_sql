@@ -13,7 +13,7 @@ router.post('/:eventid', verifyAdmin, createTicket)
 router.put('/:id', verifyAdmin, updateTicket)
 
 //DELETE Tickets
-router.delete('/:id/:hotelid', verifyAdmin, deleteTicket)
+router.delete('/:id/:eventid', verifyAdmin, deleteTicket)
 
 //GET ONE Tickets
 router.get('/:id', getOneTicket )
