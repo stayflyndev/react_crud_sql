@@ -26,4 +26,4 @@ const userSchema = new Schema({
 const users = mongoose.model('User', userSchema)
 users.createIndexes()
 
-export default  users
+export default users

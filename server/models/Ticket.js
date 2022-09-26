@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const ticketSchema = new Schema({
     title:
     {
-        String,
+        type: String,
         required: true
     },
     price: {
@@ -17,7 +17,4 @@ const ticketSchema = new Schema({
     ticketHolders: [{number: Number, unavailableTicket: {type: [Date]}}]
 });
 
-const ticket = mongoose.model('User', userSchema)
-ticket.createIndexes()
-
-export default ticket
+export default  mongoose.model('Ticket', ticketSchema)
