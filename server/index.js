@@ -6,7 +6,7 @@ import eventsRoute from './routes/events.js'
 import ticketsRoute from './routes/tickets.js'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
-
+import cors from 'cors'
 
 const app = express()
 const port = 5000
@@ -36,10 +36,17 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+app.use(cors())
+
+
+// app.use("/auth", authRoute)
+
 app.use("/auth", authRoute)
 app.use("/users", usersRoute)
 app.use("/events", eventsRoute)
 app.use("/tickets", ticketsRoute)
+
 
 //ERR HANDLING FROM THE ROUTES
 app.use((error, req, res, next) => {

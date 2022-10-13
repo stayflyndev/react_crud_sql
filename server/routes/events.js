@@ -1,5 +1,5 @@
 import express from 'express'
-import { createEvent, updateEvent, deleteEvent, getOneEvent, getAllEvents } from '../controllers/events.controller.js';
+import { createEvent, updateEvent, deleteEvent, getOneEvent, getAllEvents, getEventsByArea } from '../controllers/events.controller.js';
 const router = express.Router();
 import Event from "../models/Events.js";
 import { verifyAdmin } from '../utils/verifyToken.js';
@@ -12,15 +12,16 @@ router.post('/', verifyAdmin, createEvent)
 router.put('/:id', verifyAdmin, updateEvent)
 
 //DELETE EVENT
-router.delete('/:id', verifyAdmin, deleteEvent)
+router.delete(':id', verifyAdmin, deleteEvent)
 
 //GET ONE EVENT
-router.get('/:id', getOneEvent )
+router.get('/find/:id', getOneEvent )
 
 //GET ALL EVENTS
 router.get('/', getAllEvents)
 
-
+router.get("/eventsByArea", getEventsByArea)
+router.get("/eventsByDate", getAllEvents)
 
 
 

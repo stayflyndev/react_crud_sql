@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const eventSchema = new Schema({
     title: String,
+    location: String,
     author: String,
     desc: String,
     distance: String, // String is shorthand for {type: String}

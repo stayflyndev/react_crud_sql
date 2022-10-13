@@ -79,3 +79,21 @@ export const getAllEvents = async (req, res, next) => {
   }
 }
 
+//query
+export const getEventsByArea = async (req, res, next) => {
+
+    const location = req.query.location.split(',')
+    console.log(location)
+    try {
+
+      const list = await Promise.all(location.map(city => {
+        return Event.countDocuments({location: city})
+      }))
+      res.status(200).json(list)
+      // console.log(allEvent)
+
+  } catch (err) {
+     next(err)
+  }
+}
+
