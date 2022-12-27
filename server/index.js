@@ -7,17 +7,32 @@ import ticketsRoute from './routes/tickets.js'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import mysql from 'mysql2';
+import session from 'express-session';
+import bodyParser from 'body-parser'
+
 
 const app = express()
 const port = 5000
+//middleware
+app.use(cors())
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser())
 dotenv.config()
+
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
 
 //db connection 
 const dbconnected = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB);
+    await mongoose.connect('mongodb+srv://toria:Shadbaby90@cluster0.fjcyhoo.mongodb.net/?retryWrites=true&w=majority');
     console.log("db connected")
     
   } catch (error) {
@@ -31,17 +46,10 @@ mongoose.connection.on('disconnected', () => {
  console.log("disconnected");
 })
 
-//middleware
-app.use(cookieParser())
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
-app.use(cors())
 
 
 // app.use("/auth", authRoute)
-
+// app.use("/", (req, res) => res.json("hjhh"))
 app.use("/auth", authRoute)
 app.use("/users", usersRoute)
 app.use("/events", eventsRoute)
