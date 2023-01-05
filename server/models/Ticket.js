@@ -17,4 +17,4 @@ const ticketSchema = new Schema({
     ticketHolders: [{number: Number, unavailableTicket: {type: [Date]}}]
 });
 
-export default  mongoose.model('Ticket', ticketSchema)
+// export default  mongoose.model('Ticket', ticketSchema)

@@ -1,7 +1,7 @@
 import express from 'express'
 import { createEvent, updateEvent, deleteEvent, getOneEvent, getAllEvents, getEventsByArea } from '../controllers/events.controller.js';
 const router = express.Router();
-import Event from "../models/Events.js";
+// import Event from "../models/Events.js";
 import { verifyAdmin } from '../utils/verifyToken.js';
 // import createError from '../utils/error.js';
 

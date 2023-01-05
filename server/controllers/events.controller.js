@@ -1,4 +1,4 @@
-import Event from"../models/Events.js";
+// import Event from"../models/Events.js";
 import { createError } from "../utils/error.js";
 
 //CREATE AN EVENT

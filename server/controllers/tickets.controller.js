@@ -1,5 +1,5 @@
-import Event from '../models/Events.js'
-import Ticket from '../models/Ticket.js'
+// import Event from '../models/Events.js'
+// import Ticket from '../models/Ticket.js'
 
 export const createTicket = async(req, res, next) => {
 

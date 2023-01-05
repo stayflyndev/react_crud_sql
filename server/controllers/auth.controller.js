@@ -1,4 +1,4 @@
-import User from '../models/Users.js'
+// import User from '../models/Users.js'
 import bcrypt from 'bcrypt';
 import { createError } from '../utils/error.js';
 import jwt from 'jsonwebtoken'
@@ -11,8 +11,6 @@ import {db_connection} from '../db.config.js'
 //POST
 
 export const registerUserr = (req, res) => {
-
-
     const sqlquery = "SELECT * FROM accounts ";
     db_connection.query(sqlquery, function (err, data) {
         console.log(data)
@@ -41,10 +39,7 @@ export const registerUser = (req, res) => {
     db_connection.query(query, [user_vals], (err, data) => {
         if(err) return res.status(500).json(err)
         return res.status(200).json("User created")
-        
-
-
-    })
+        })
 
 
 
@@ -66,17 +61,22 @@ export const loginUser =  async (req, res, next) => {
 
 const query = "SELECT * FROM `accounts` WHERE email = ?";
  db_connection.query(query, [req.body.email], (err, data) => {
-    console.log(data[0].first_name)
-    if(err) return res.status(500).json(err)
-    if (data.length === 0 ) return res.status(404).json("No user found with the email ")
+    console.log(data[0])
     
-    const checkPassword = bcrypt.compareSync(req.body.password, data[0].password)
-    if(!checkPassword) return res.status(400).json("wrong info entered")
+    console.log(req.body.password + " " + data[0].password)
+    const stringPass = req.body.password.toString()
+    if(err) return res.status(500).json(err)
+    
+    if (data.length === 0 ) return res.status(404).json("No Account Foundeth 😡 ")
+    //check password
+    const checkPassword = bcrypt.compareSync(stringPass, data[0].password)
+    console.log(req.body.password + " " + data[0].password)
+    if(!checkPassword) return res.status(400).json("Nopeee, Wrong Username or Password ❌")
 
 
     //server create token by user id 
     const u_id =  { id: data[0].id}
-    const token = jwt.sign(u_id, "secretkey")
+    const token = jwt.sign(u_id, "verysecretkeythatnobodyknowsbutme")
 
     //destructor user password
     const {password, ...other } = data[0]
@@ -88,7 +88,7 @@ const query = "SELECT * FROM `accounts` WHERE email = ?";
  })
 
 
-   
+}
     // try {
     //     const user = await User.findOne({ username: username })
     //     if (!user) return next(createError(404, "User not found"))
@@ -108,10 +108,11 @@ const query = "SELECT * FROM `accounts` WHERE email = ?";
     //     next(err)
 
     // }
-}
 
 //LOGOUT USER
 
-export const logout = (req, res) => {
-    res.clearCookie("access token", { secure: true, sameSite: "none"}).status(200).json("Signed Out!")
+export const logoutUser = (req, res) => {
+    res.clearCookie("accesstoken",
+    { secure: true, sameSite: "none"})
+     .status(200).json("Signed Out!")
  }

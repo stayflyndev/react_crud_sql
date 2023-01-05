@@ -23,7 +23,7 @@ const userSchema = new Schema({
 },
     { timestamps: true });
 
-const users = mongoose.model('User', userSchema)
-users.createIndexes()
+// const users = mongoose.model('User', userSchema)
+// users.createIndexes()
 
 export default users

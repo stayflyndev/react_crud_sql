@@ -29,22 +29,22 @@ app.use(session({
 }));
 
 
-//db connection 
-const dbconnected = async () => {
-  try {
-    await mongoose.connect('mongodb+srv://toria:Shadbaby90@cluster0.fjcyhoo.mongodb.net/?retryWrites=true&w=majority');
-    console.log("db connected")
+// //db connection 
+// const dbconnected = async () => {
+//   try {
+//     await mongoose.connect('mongodb+srv://toria:Shadbaby90@cluster0.fjcyhoo.mongodb.net/?retryWrites=true&w=majority');
+//     console.log("db connected")
     
-  } catch (error) {
-    //initial connection
-    throw error;
-  }
-}
+//   } catch (error) {
+//     //initial connection
+//     throw error;
+//   }
+// }
 
-//continue a connection after initialization
-mongoose.connection.on('disconnected', () => {
- console.log("disconnected");
-})
+// //continue a connection after initialization
+// mongoose.connection.on('disconnected', () => {
+//  console.log("disconnected");
+// })
 
 
 
@@ -71,6 +71,6 @@ app.use((error, req, res, next) => {
 })
 
 app.listen(port, () => {
-  dbconnected()
+
   console.log(`Example app listening on port ${port}`)
 })
